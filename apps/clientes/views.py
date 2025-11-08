@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import ClienteForm, CustomUserCreationForm
+from django.urls import reverse_lazy
 
 from django.views import View
 from django.contrib.auth import login
@@ -9,9 +10,22 @@ from django.contrib.auth import login
 class CustomLoginView(LoginView):
     template_name = 'clientes/login.html'
     redirect_authenticated_user = True
-    
+    # Valor por defecto cuando no hay ?next=...: redirigir a registro (o cambia por la URL que quieras)
+    success_url = reverse_lazy('clientes:register')
+
+    def get_success_url(self):
+        """
+        Prioriza el parámetro `next` (en POST o GET). Si no existe, usa `success_url`.
+        Esto permite que enlaces que incluyan `?next=/ruta/` funcionen correctamente.
+        """
+        # Django usa `redirect_field_name` (por defecto 'next') para buscar la URL de redirección
+        redirect_to = self.request.POST.get(self.redirect_field_name) or self.request.GET.get(self.redirect_field_name)
+        if redirect_to:
+            return redirect_to
+        return str(self.success_url)
+
     def form_valid(self, form):
-        # Llama al método original para manejar el login
+        # Llama al método original para manejar el login (éste devolverá la redirección apropiada)
         response = super().form_valid(form)
         # Añade el mensaje de éxito
         messages.success(self.request, f"¡Bienvenido de nuevo, {self.request.user.username}!")
@@ -27,25 +41,6 @@ class CustomLogoutView(LogoutView):
         # Llama al método dispatch original para ejecutar el logout y la redirección
         return super().dispatch(request, *args, **kwargs)
     
-
-
-def create_user(request):
-    if request.method == 'POST':
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "¡Registro exitoso! Ahora puedes iniciar sesión.")
-            return redirect('clientes:login')
-    else:
-        form = ClienteForm()
-    
-    return render(request, 'clientes/registro.html', {'form': form})
-
-
-# clientes/views.py
-
-
-
 
 class RegistroClienteView(View):
     template_name = 'clientes/registro.html' 
@@ -79,7 +74,7 @@ class RegistroClienteView(View):
             
             # Éxito: Redirigir a la página principal
             # return redirect('productos:inicio') 
-            return redirect('clientes:login') 
+            return redirect('clientes:login') # Redireccion de prueba
 
         # Fracaso: Volver a renderizar con errores
         context = {

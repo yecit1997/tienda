@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CustomLoginView, CustomLogoutView, create_user, RegistroClienteView
+from .views import CustomLoginView, CustomLogoutView, RegistroClienteView
 
 app_name = 'clientes'
 

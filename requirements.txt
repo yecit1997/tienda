@@ -2,3 +2,4 @@ django
 pillow
 python-dotenv
 django-widget-tweaks
+crispy-bootstrap5   

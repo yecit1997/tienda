@@ -52,9 +52,15 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     'widget_tweaks',
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
+
+# CRISPY FORM SETTINGS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
