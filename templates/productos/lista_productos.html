@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Productos - Tienda Online
+{% endblock title %}
+
+{% block content %}
+    <h1>Lista de Productos</h1>
+    <div class="mb-3 text-end">
+        <a href="{% url 'productos:crear_producto' %}" class="btn btn-primary">Agregar Producto</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'productos:lista_productos' %}">Productos</a>
         <a class="nav-link" href="#">Clientes</a>
         <a class="nav-link" href="{% url 'proveedores:listar_proveedores' %}">Proveedores</a>
       </div>
