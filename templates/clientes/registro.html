@@ -15,8 +15,9 @@
             {% csrf_token %}
             {{ user_form|crispy }}
             {{ cliente_form|crispy }}
-            <button type="submit" class="mb-4 btn btn-primary w-100">Registrarse</button> 
+            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
         </form>
+      </div>
     </div>
   </div>
-{% endblock %}
+{% endblock content %}

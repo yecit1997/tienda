@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import ClienteForm, CustomUserCreationForm
+from .forms import ClienteForm, CustomLoginForm, CustomUserCreationForm
 from django.urls import reverse_lazy
 
 from django.views import View
@@ -9,6 +9,7 @@ from django.contrib.auth import login
 
 class CustomLoginView(LoginView):
     template_name = 'clientes/login.html'
+    authentication_form = CustomLoginForm
     redirect_authenticated_user = True
     # Valor por defecto cuando no hay ?next=...: redirigir a registro (o cambia por la URL que quieras)
     success_url = reverse_lazy('clientes:register')
@@ -82,3 +83,6 @@ class RegistroClienteView(View):
             'cliente_form': cliente_form,
         }
         return render(request, self.template_name, context)
+
+
+
