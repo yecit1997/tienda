@@ -28,7 +28,6 @@ class CustomLoginView(LoginView):
     def form_valid(self, form):
         # Llama al método original para manejar el login (éste devolverá la redirección apropiada)
         response = super().form_valid(form)
-        # Añade el mensaje de éxito
         messages.success(self.request, f"¡Bienvenido de nuevo, {self.request.user.username}!")
         return response
     
@@ -37,7 +36,6 @@ class CustomLogoutView(LogoutView):
     next_page = 'clientes:login'
     
     def dispatch(self, request, *args, **kwargs):
-        # Agrega un mensaje antes de que el usuario sea desconectado
         messages.info(request, "Has cerrado sesión correctamente.")
         # Llama al método dispatch original para ejecutar el logout y la redirección
         return super().dispatch(request, *args, **kwargs)
@@ -72,8 +70,7 @@ class RegistroClienteView(View):
             
             # Opcional: Iniciar sesión al nuevo usuario
             # login(request, new_user)
-            
-            # Éxito: Redirigir a la página principal
+            messages.success(request, f"¡Registro exitoso! Bienvenido, {new_user.username}. Por favor, inicia sesión.")
             # return redirect('productos:inicio') 
             return redirect('clientes:login') # Redireccion de prueba
 
