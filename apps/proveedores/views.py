@@ -1,3 +1,22 @@
-from django.shortcuts import render
+# from django.shortcuts import render
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
+from .models import Proveedor
+from .proveedores_forms import ProveedorForm
 
-# Create your views here.
+
+class create_proveedor(CreateView):
+    template_name = "proveedores/crear_proveedor.html"
+    form_class = ProveedorForm
+    success_url = "/proveedores/"
+
+
+class list_proveedores(ListView):
+    template_name = "proveedores/lista_proveedor.html"
+    model = Proveedor
+    context_object_name = "proveedores"
