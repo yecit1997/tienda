@@ -12,7 +12,7 @@ class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
     redirect_authenticated_user = True
     # Valor por defecto cuando no hay ?next=...: redirigir a registro (o cambia por la URL que quieras)
-    success_url = reverse_lazy('clientes:register')
+    success_url = reverse_lazy('proveedores:listar_proveedores')
 
     def get_success_url(self):
         """

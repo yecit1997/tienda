@@ -12,7 +12,11 @@
       {% if user.is_authenticated %}
         <div class="navbar-nav ms-auto">
           <span class="nav-link">Bienvenido, {{ user.username }}</span>
-          <a class="nav-link" href="{% url 'clientes:logout' %}">Cerrar sesión</a>
+          {% comment %} <a class="nav-link" href="{% url 'clientes:logout' %}">Cerrar sesión</a> {% endcomment %}
+          <form method="post" action="{% url 'clientes:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+          </form>
         </div>
       {% else %}
         <div class="navbar-nav ms-auto">

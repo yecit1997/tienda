@@ -5,6 +5,9 @@
 {% endblock title %}
 
 {% block content %}
+<div class="m-3 text-end">
+    <a href="{% url 'proveedores:crear_proveedor' %}" class="btn btn-primary">Crear Proveedor</a>
+</div>
     <h1>Lista de Proveedores</h1>
     <table class="table">
         <thead>
