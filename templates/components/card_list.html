@@ -1,8 +1,13 @@
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="..." />
+  <img src=" {{ imagen_url }} " class="card-img-top" alt="Imagen de {{ nombre_imagen }}" />
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title"> {{titulo}} </h5>
+    <p class="card-text"> {{contenido}} </p>
+    {% if id_boton %}
+            <button type="button" class="{{class_boton}}" id="{{ id_boton }}">Ver detalles</button>
+        {% else %}
+            {# Si no se proporciona un id_boton, el botón puede estar deshabilitado o no tener funcionalidad #}
+            <button type="button" class="btn btn-secondary" disabled>Ver detalles</button>
+        {% endif %}
   </div>
 </div>
