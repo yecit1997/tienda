@@ -9,24 +9,9 @@
     <div class="mb-3 text-end">
         <a href="{% url 'productos:crear_producto' %}" class="btn btn-primary">Agregar Producto</a>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for producto in productos %}
-            <tr>
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.descripcion }}</td>
-                <td>{{ producto.precio }}</td>
-                <td>{{ producto.stock }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container d-flex flex-wrap gap-3 ">
+        {% for producto in productos %}
+            {% include "components/card_list.html" with titulo=producto.nombre contenido=producto.descripcion imagen_url=producto.imagen.url class_boton="btn btn-primary" id_boton="btn-detalles-{{ producto.id }}"%}
+        {% endfor %}
+    </div>
 {% endblock content %}

@@ -1,8 +1,8 @@
 <div class="card" style="width: 18rem;">
-  <img src=" {{ imagen_url }} " class="card-img-top" alt="Imagen de {{ nombre_imagen }}" />
+  <img src="{{ imagen_url }}" class="card-img-top" alt="Imagen de {{ nombre_imagen }}" />
   <div class="card-body">
     <h5 class="card-title"> {{titulo}} </h5>
-    <p class="card-text"> {{contenido}} </p>
+    <p class="card-text"> {{contenido|truncatechars:100}} </p>
     {% if id_boton %}
             <button type="button" class="{{class_boton}}" id="{{ id_boton }}">Ver detalles</button>
         {% else %}
